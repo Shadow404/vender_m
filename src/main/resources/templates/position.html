@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hello, World</title>
+    <style type="text/css">
+        html{height:100%}
+        body{height:100%;margin:0px;padding:0px}
+        #container{height:100%;width: 100%;)}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=">
+        //v2.0版本的引用方式：src="http://api.map.baidu.com/api?v=2.0&ak=您的密钥"
+    </script>
+</head>
+
+<body>
+<input th:type="hidden" id="maplnt" th:value="${vender.getVenderLongitude()}"><!--经度-->
+<input th:type="hidden" id="maplat" th:value="${vender.getVenderLatitude()}"><!--纬度-->
+<div id="container"></div>
+<script type="text/javascript">
+    var map = new BMap.Map("container",{maxZoom:20});
+    // 创建地图实例
+    var vlnt=document.getElementById("maplnt").value;
+    var vlat=document.getElementById("maplat").value;
+    var point = new BMap.Point(vlnt, vlat);
+    // 创建点坐标
+    var marker= new BMap.Marker(point);;
+    map.centerAndZoom(point, 20);
+    map.enableScrollWheelZoom(true);
+    map.addOverlay(marker);
+
+</script>
+</body>
+</html>
